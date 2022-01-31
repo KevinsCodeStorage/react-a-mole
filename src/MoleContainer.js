@@ -4,18 +4,20 @@ import {useState} from 'react'
 
 
 function MoleContainer(props){
-    let [displayMole, setDisplayMole]= useState(false)
-    
-    function bop(){
+    let [theMole, setTheMole] = useState(false)
+
+    const handleClick = (e) => {
         props.setScore(props.score + 1)
-        setDisplayMole(false)
+        setTheMole(false)
     }
 
+    let displayMole = theMole ? <Mole setScore={props.setScore} toggle={setTheMole} handleClick={handleClick} /> : <EmptySlot toggle={setTheMole} />
 
     return (
-        <div>
-            {(displayMole ? <Mole bop={bop}/> : <EmptySlot displayMole={displayMole}/>)}
+        <div style={{'display': 'inline-block', 'width': '30vw'}}>
+            {displayMole}
         </div>
     )
 }
+
 export default MoleContainer
